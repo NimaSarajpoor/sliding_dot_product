@@ -13,7 +13,7 @@ check_errs()
 get_safe_python_version()
 {
     RAW_HTML=$(curl -s --location https://devguide.python.org/versions)
-    SAFE_PYTHON=$(echo "$RAW_HTML" | xmllint --html --xpath '//section[@id="supported-versions"]//table/tbody/tr[count(//section[@id="supported-versions"]//table/tbody/tr[td[.="security"]]/preceding-sibling::*)]/td[1]/p/text()' - 2> /dev/null)
+    SAFE_PYTHON=$(echo "$RAW_HTML" | tail -n +1 | xmllint --html --xpath '//section[@id="supported-versions"]//table/tbody/tr[count(//section[@id="supported-versions"]//table/tbody/tr[td[.="security"]]/preceding-sibling::*)]/td[1]/p/text()' - 2> /dev/null)
     check_errs $?
 }
 
