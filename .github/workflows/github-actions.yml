@@ -41,8 +41,10 @@ jobs:
       - name: Install libraries from environment file
         uses: conda-incubator/setup-miniconda@v3
         with:
+          activate-environment: ""
           environment-file: ./environment.yml
           miniforge-version: latest
+          auto-activate-base: true
 
       - name: Show Full Numba Environment
         run: python -m numba -s
