@@ -29,8 +29,14 @@ jobs:
         run: echo ${{ env.PYTHON_VERSION }}
         shell: bash
 
-      - name: Update python version in environment file 
-        run: sed -i '' 's/python.*/python>=${{ env.PYTHON_VERSION }}/' environment.yml
+      - name: Update python version in environment file
+        if: runner.os == 'macOS'
+        run: sed -i '' 's/python.*/python>=${{ env.PYTHON_VERSION }}/' ./environment.yml
+        shell: bash
+
+      - name: Update python version in environment file
+        if: runner.os != 'macOS'
+        run: sed -i 's/python.*/python>=${{ env.PYTHON_VERSION }}/' ./environment.yml
         shell: bash
       
       - name: Install libraries from environment file
