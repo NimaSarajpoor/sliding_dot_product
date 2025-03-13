@@ -38,6 +38,10 @@ jobs:
         if: runner.os != 'macOS'
         run: sed -i 's/python.*/python>=${{ env.PYTHON_VERSION }}/' ./environment.yml
         shell: bash
+
+      - name: Display Environment File
+        run: cat ./environment.yml
+        shell: bash
       
       - name: Install libraries from environment file
         uses: conda-incubator/setup-miniconda@v3
