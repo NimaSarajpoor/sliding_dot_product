@@ -31,7 +31,7 @@ jobs:
 
       - name: update environment file using python version in macOS
         if: runner.os == 'macOS'
-        run: sed -i 's/python.*/python==${{ env.PYTHON_VERSION }}/' environment.yml
+        run: sed -i '' 's/python.*/python==${{ env.PYTHON_VERSION }}/' environment.yml
         shell: bash
 
       - name: update environment file using python version NOT in macOS
