@@ -28,14 +28,9 @@ jobs:
       - name: Display Python Version
         run: echo ${{ env.PYTHON_VERSION }}
         shell: bash
-      
-      - name: Set Up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
-      
-      - name: Display Python Version
-        run: python -c "import sys; print(sys.version)"
+
+      - name: Update python version in environment file 
+        run: sed -i '' 's/python.*/python>=${{ env.PYTHON_VERSION }}/' environment.yml
         shell: bash
       
       - name: Install libraries from environment file
