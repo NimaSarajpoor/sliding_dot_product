@@ -8,10 +8,7 @@ on:
 jobs:
   unit-testing:
     runs-on: ${{ matrix.os }}
-    defaults:
-      run:
-        shell: bash -el {0}
-    
+  
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
@@ -21,11 +18,11 @@ jobs:
       - name: Install xmllint on Linux
         if: runner.os == 'Linux'
         run: sudo apt-get install libxml2-utils
-        shell: bash
+        shell: bash -el {0}
       
       - name: Set environment variables
         run:  echo "PYTHON_VERSION=$(curl --location https://devguide.python.org/versions | xmllint --html --xpath '//section[@id="supported-versions"]//table/tbody/tr[count(//section[@id="supported-versions"]//table/tbody/tr[td[.="security"]]/preceding-sibling::*)]/td[1]/p/text()' - 2> /dev/null)" >> $GITHUB_ENV
-        shell : bash
+        shell : bash -el {0}
 
       # ${{ env.PYTHON_VERSION }}
 
@@ -36,16 +33,16 @@ jobs:
       - name: Update environment.yml in macOS
         if: runner.os == 'macOS'
         run: sed -i '' 's/python.*/python>=${{ env.PYTHON_VERSION }}/' environment.yml
-        shell: bash
+        shell: bash -el {0}
 
       - name: Update environment.yml in Linux or Windows
         if: runner.os != 'macOS'
         run: sed -i 's/python.*/python>=${{ env.PYTHON_VERSION }}/' environment.yml
-        shell: bash
+        shell: bash -el {0}
 
       - name: Display environment.yml
         run: cat environment.yml
-        shell: bash
+        shell: bash -el {0}
 
       - name: set up conda and install dependencies
         uses: conda-incubator/setup-miniconda@v3
@@ -54,21 +51,15 @@ jobs:
       
       - name : Display Conda Environments
         run: conda env list
-        shell: bash
-
-      - name: Activate Conda Environment
-        run: |
-          conda init
-          conda activate test
-        shell: bash
-        
+        shell: bash -el {0}
+  
       - name: Display conda info
         run: conda info
-        shell: bash
+        shell: bash -el {0}
 
       - name: Display conda list
         run: conda list
-        shell: bash
+        shell: bash -el {0}
       
       # - name: Set Up Python
       #  uses: actions/setup-python@v5
@@ -77,7 +68,7 @@ jobs:
 
       - name: Display Python Version
         run: python -c "import sys; print(sys.version)"
-        shell: bash
+        shell: bash -el {0}
       
       # - name: Upgrade Pip
       #  run: python -m pip install --upgrade pip
@@ -93,8 +84,8 @@ jobs:
       
       - name: Show Full Numba Environment
         run: python -m numba -s
-        shell: bash
+        shell: bash -el {0}
       
       - name: Run Unit Tests
         run: ./test.sh
-        shell: bash
+        shell: bash -el {0}
