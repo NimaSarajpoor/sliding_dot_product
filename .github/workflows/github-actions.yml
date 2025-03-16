@@ -8,6 +8,9 @@ on:
 jobs:
   unit-testing:
     defaults:
+      name: Set default shell to `login bash`
+      # This is required to properly activate the conda environment
+      # https://github.com/conda-incubator/setup-miniconda?tab=readme-ov-file#use-a-default-shell
       run:
         shell: bash -el {0}
 
