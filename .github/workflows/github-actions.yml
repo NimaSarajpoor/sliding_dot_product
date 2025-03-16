@@ -8,15 +8,16 @@ on:
 jobs:
   unit-testing:
     runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-    
     defaults:
       run:
         shell: bash -el {0}
     
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    
     steps:
+    
       - name: Install xmllint on Linux
         if: runner.os == 'Linux'
         run: sudo apt-get install libxml2-utils
@@ -40,6 +41,10 @@ jobs:
       - name: Update environment.yml in Linux or Windows
         if: runner.os != 'macOS'
         run: sed -i 's/python.*/python>=${{ env.PYTHON_VERSION }}/' environment.yml
+        shell: bash
+
+      - name: Display environment.yml
+        run: cat environment.yml
         shell: bash
 
       - name: set up conda and install dependencies
