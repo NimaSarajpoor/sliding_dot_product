@@ -55,6 +55,10 @@ jobs:
       - name : Display Conda Environments
         run: conda env list
         shell: bash
+
+      - name: Activate Conda Environment
+        run: conda activate test
+        shell: bash
         
       - name: Display conda info
         run: conda info
