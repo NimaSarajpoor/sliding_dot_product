@@ -32,7 +32,7 @@ jobs:
       # update environment.yml by replacing python version with ${{ env.PYTHON_VERSION }}
       - name: Update environment.yml in macOS
         if: runner.os == 'macOS'
-        run: sed -i '' 's/python.*/python>=${{ env.PYTHON_VERSION }}/' environment.yml
+        run: sed -i '' 's/python.*/python==${{ env.PYTHON_VERSION }}/' environment.yml
         shell: bash -el {0}
 
       - name: Update environment.yml in Linux or Windows
@@ -46,8 +46,12 @@ jobs:
 
       - name: set up conda and install dependencies
         uses: conda-incubator/setup-miniconda@v3
-        with:
-          environment-file: ./environment.yml
+        # with:
+        #  environment-file: ./environment.yml
+
+      - name: install fftw via conda
+        run: conda install -c conda-forge fftw
+        shell: bash -el {0}
       
       - name : Display Conda Environments
         run: conda env list
