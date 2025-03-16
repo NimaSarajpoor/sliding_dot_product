@@ -32,22 +32,26 @@ jobs:
       # update environment.yml by replacing python version with ${{ env.PYTHON_VERSION }}
       - name: Update environment.yml in macOS
         if: runner.os=='macOS'
-        run: sed -i '' 's/python.*/python==${{ env.PYTHON_VERSION }}/' environment.yml
+        run: sed '' 's/python.*/python==${{ env.PYTHON_VERSION }}/' environment.yml > environment_new.yml
         shell: bash -el {0}
 
       - name: Update environment.yml in Linux or Windows
         if: runner.os!='macOS'
-        run: sed -i 's/python.*/python>=${{ env.PYTHON_VERSION }}/' environment.yml
+        run: sed 's/python.*/python>=${{ env.PYTHON_VERSION }}/' environment.yml > environment_new.yml
         shell: bash -el {0}
 
-      - name: Display environment.yml
-        run: cat environment.yml
+      - name: Display environment_new.yml
+        run: cat environment_new.yml
         shell: bash -el {0}
 
       - name: set up conda and install dependencies
         uses: conda-incubator/setup-miniconda@v3
         with:
-          environment-file: ./environment.yml
+          environment-file: environment_new.yml
+        
+      - name : Remove environment_new.yml
+        run: rm -rf environment_new.yml
+        shell: bash -el {0}
 
       - name: install pytest and coverage
         run: |
