@@ -31,13 +31,7 @@ jobs:
 
       # update environment.yml by replacing python version with ${{ env.PYTHON_VERSION }}
       - name: Update environment.yml in macOS
-        if: runner.os=='macOS'
-        run: sed '' 's/python.*/python==${{ env.PYTHON_VERSION }}/' environment.yml > environment_new.yml
-        shell: bash -el {0}
-
-      - name: Update environment.yml in Linux or Windows
-        if: runner.os!='macOS'
-        run: sed 's/python.*/python>=${{ env.PYTHON_VERSION }}/' environment.yml > environment_new.yml
+        run: sed 's/python.*/python==${{ env.PYTHON_VERSION }}/' environment.yml > environment_new.yml
         shell: bash -el {0}
 
       - name: Display environment_new.yml
