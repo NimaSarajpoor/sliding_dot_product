@@ -8,10 +8,10 @@ on:
 jobs:
   unit-testing:
     defaults:
-      name: Set default shell to `login bash`
       # This is required to properly activate the conda environment
       # https://github.com/conda-incubator/setup-miniconda?tab=readme-ov-file#use-a-default-shell
       run:
+        name: Set default shell to `login bash`
         shell: bash -el {0}
 
     runs-on: ${{ matrix.os }}
