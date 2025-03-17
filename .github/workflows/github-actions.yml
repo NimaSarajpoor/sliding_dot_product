@@ -44,11 +44,6 @@ jobs:
       - name : Remove environment_new.yml
         run: rm -rf environment_new.yml
        
-      - name: install pytest and coverage
-        run: |
-          conda install conda-forge::pytest
-          conda install conda-forge::coverage
-       
       - name : Display Conda Environments
         run: conda env list
        
