@@ -12,7 +12,7 @@ jobs:
         # Set default shell to login-bash
         # This is required to properly activate the conda environment
         # https://github.com/conda-incubator/setup-miniconda?tab=readme-ov-file#use-a-default-shell
-        shell: bash -el {0}
+        shell: bash
 
     runs-on: ${{ matrix.os }}
     strategy:
