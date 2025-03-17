@@ -2,17 +2,17 @@ channels:
   - numba
   - conda-forge
 dependencies:
-  - python>=3.9
+  - python>=3.10
   - numpy>=1.22
   - scipy>=1.10
   - numba>=0.59.1
   - fftw
-  - pyfftw
-  - jax
+  - pyfftw>=0.15.0
   - panel
   - pandas>=0.20.0
   - flake8>=3.7.7
   - black>=22.1.0
   - jupyterlab>=3.0
   - matplotlib>=3.3.0
-  - isort>=5.11.0
+  - pytest>=8.3
+  - coverage>=7.6
