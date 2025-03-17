@@ -7,8 +7,8 @@ on:
 
 jobs:
   unit-testing:
-    name: Set default shell to login-bash
     defaults:
+    - name: Set default shell to login-bash
       run:
         # Set default shell to login-bash
         # This is required to properly activate the conda environment
