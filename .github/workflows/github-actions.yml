@@ -40,10 +40,13 @@ jobs:
         uses: conda-incubator/setup-miniconda@v3
         with:
           environment-file: environment_new.yml
-        
+      
       - name : Remove environment_new.yml
         run: rm -rf environment_new.yml
-       
+
+      - name: Display conda in $PATH
+        run: echo $PATH | tr : '\n' | grep conda
+
       - name : Display Conda Environments
         run: conda env list
        
