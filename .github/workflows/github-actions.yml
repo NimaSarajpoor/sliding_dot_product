@@ -1,7 +1,7 @@
 name: Tests
 on:
   push:
-    branches: add_test
+    branches: '**'
   pull_request:
     branches: main
 
@@ -44,8 +44,8 @@ jobs:
       - name : Remove environment_new.yml
         run: rm -rf environment_new.yml
 
-      - name: Display conda in PATH
-        run: echo $PATH
+      - name: Display conda in PATH env var
+        run: echo $PATH 
 
       - name : Display Conda Environments
         run: conda env list
