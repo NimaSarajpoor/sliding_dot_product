@@ -45,7 +45,7 @@ jobs:
         run: rm -rf environment_new.yml
 
       - name: Display conda in PATH env var
-        run: echo $PATH 
+        run: echo -e ${PATH//:/\\n}
 
       - name : Display Conda Environments
         run: conda env list
