@@ -45,7 +45,7 @@ jobs:
         run: rm -rf environment_new.yml
 
       - name: Display conda in $PATH
-        run: echo $PATH | tr : '\n' | grep conda
+        run: echo $PATH
 
       - name : Display Conda Environments
         run: conda env list
